@@ -154,7 +154,7 @@ def generate_toc(content):
         node, new_header = node.add(header, all_ids)
         header.replaceWith(new_header)  # to get our ids back into soup
 
-    if (settoc):
+    if settoc:
         tree_string = '{}'.format(tree)
         tree_soup = BeautifulSoup(tree_string, 'html.parser')
         content.toc = tree_soup.decode(formatter='html')
