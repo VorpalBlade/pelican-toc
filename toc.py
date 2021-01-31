@@ -13,6 +13,7 @@ import re
 from bs4 import BeautifulSoup, Comment
 
 from pelican import contents, signals
+from pelican.settings import read_settings
 from pelican.utils import slugify
 
 
@@ -65,7 +66,9 @@ class HtmlTreeNode(object):
             new_string = "".join(new_string)
 
         if not new_id:
-            new_id = slugify(new_string, ())
+            settings = read_settings()
+            subs = settings['SLUG_REGEX_SUBSTITUTIONS']
+            new_id = slugify(new_string, subs)
 
         new_id = unique(new_id, ids)  # make sure id is unique
         new_header.attrs['id'] = new_id
